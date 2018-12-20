@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleInitialData } from './actions/shared';
-import AppBar from '@material-ui/core/AppBar';
+import { handleInitialData } from '../actions/shared';
+import ButtonAppBar from './ButtonAppBar';
+
 class App extends Component {
   componentDidMount() {
     console.log(this.props);
@@ -11,7 +12,8 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <AppBar>Hi</AppBar>
+        <ButtonAppBar />
+        <h2 className='timeline'>Your Timeline</h2>
       </div>
     );
   }
