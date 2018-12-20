@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialData } from './actions/shared';
+import AppBar from '@material-ui/core/AppBar';
 class App extends Component {
   componentDidMount() {
     console.log(this.props);
@@ -8,7 +9,11 @@ class App extends Component {
     dispatch(handleInitialData());
   }
   render() {
-    return <div className='App'>REDUX APP</div>;
+    return (
+      <div className='App'>
+        <AppBar>Hi</AppBar>
+      </div>
+    );
   }
 }
 
