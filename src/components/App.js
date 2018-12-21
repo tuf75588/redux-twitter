@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import ButtonAppBar from './ButtonAppBar';
-
+import Dashboard from './Dashboard';
+import { BrowserRouter as Router } from 'react-router-dom';
 class App extends Component {
   componentDidMount() {
     console.log(this.props);
@@ -11,10 +12,14 @@ class App extends Component {
   }
   render() {
     return (
-      <div className='App'>
-        <ButtonAppBar />
-        <h2 className='timeline'>Your Timeline</h2>
-      </div>
+      <>
+        <Router>
+          <div className='container'>
+            <ButtonAppBar />
+            <Dashboard />
+          </div>
+        </Router>
+      </>
     );
   }
 }

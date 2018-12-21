@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import { setAuthedUser } from './authedUser';
-import { receiveUsers } from './users';
-import { receiveTweets } from './tweets';
+import authedUser from './authedUser';
+import users from './users';
+import tweets from './tweets';
 
 export default combineReducers({
-  receiveUsers,
-  receiveTweets,
-  setAuthedUser
+  users,
+  tweets,
+  authedUser
 });
