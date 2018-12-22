@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import Tweet from './Tweet';
 //!connect our app to redux
 class Dashboard extends Component {
   render() {
-    const { tweetId } = this.props;
+    const { id } = this.props;
 
     return (
       <>
@@ -12,15 +12,9 @@ class Dashboard extends Component {
           <h2 className='timeline'>Your Timeline</h2>
           <div>
             <ul className='dashboard-list'>
-              {tweetId.map((tweet) => {
-                return (
-                  <li>
-                    <Link to='#' className='tweet'>
-                      {tweet.id}
-                    </Link>
-                  </li>
-                );
-              })}
+              {id.map((id) => (
+                <Tweet id={id} />
+              ))}
             </ul>
           </div>
         </div>
@@ -30,12 +24,9 @@ class Dashboard extends Component {
 }
 function mapStateToProps({ tweets, authedUser, users }) {
   //! we need each tweet id?
-  const tweetId = Object.keys(tweets)
-    .map((tweet) => tweets[tweet])
-    .sort((a, b) => b.timestamp - a.timestamp);
-
+  const id = Object.keys(tweets).sort((a, b) => tweets[b].timestamp - tweets[a].timestamp);
   return {
-    tweetId
+    id
   };
 }
 export default connect(mapStateToProps)(Dashboard);

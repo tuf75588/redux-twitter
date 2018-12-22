@@ -6,7 +6,6 @@ import Dashboard from './Dashboard';
 import { BrowserRouter as Router } from 'react-router-dom';
 class App extends Component {
   componentDidMount() {
-    console.log(this.props);
     const { dispatch } = this.props;
     dispatch(handleInitialData());
   }
