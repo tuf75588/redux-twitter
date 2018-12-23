@@ -11,26 +11,26 @@ class Tweet extends Component {
     const { id, tweet, avatar, replyTweet } = this.props;
     const { author } = tweet;
     const likes = tweet.likes.length;
-    console.log('replyTweet :', replyTweet);
+
     return (
       <li>
-        <Link to='/' className='tweet'>
+        <Link className='tweet' to='/'>
           <img src={avatar} alt='' className='avatar' />
           <div className='tweet-info'>
             <div>
-              <span style={{ fontWeight: 700, marginRight: '5px' }}>{author}</span>
+              <span>{author}</span>
               <span />
-              <div>{formatDate(tweet.timestamp)}</div>
+              <div>{formatDate(tweet.timestamp)}</div>{' '}
               {replyTweet.length ? <button className='replying-to'>Replying to : {replyTweet}</button> : null}
               <p>{tweet.text}</p>
             </div>
             <div className='tweet-icons'>
-              <div className='tweet-icon'>
-                <TiArrowBackOutline />
-              </div>
-              <button className='heart-icon'>
-                <TiHeartOutline className='tweet-icon' />
+              <TiArrowBackOutline className='tweet-icon' style={{ verticalAlign: 'middle' }} />
+              <span>2</span>
+              <button className='heart-button'>
+                <TiHeartOutline className='tweet-icon' style={{ verticalAlign: 'middle' }} height='1em' />
               </button>
+              <span>1</span>
             </div>
           </div>
         </Link>

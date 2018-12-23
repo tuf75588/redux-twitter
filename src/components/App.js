@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
-import ButtonAppBar from './ButtonAppBar';
 import Dashboard from './Dashboard';
 import { BrowserRouter as Router } from 'react-router-dom';
+import LoadingBar from 'react-redux-loading';
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -11,16 +11,24 @@ class App extends Component {
   }
   render() {
     return (
-      <>
-        <Router>
-          <div className='container'>
-            <ButtonAppBar />
-            <Dashboard />
-          </div>
-        </Router>
-      </>
+      <Router>
+        <>
+          <LoadingBar />
+          {this.props.loading === true ? null : (
+            <div className='container'>
+              <Dashboard />
+            </div>
+          )}
+        </>
+      </Router>
     );
   }
 }
+function mapStateToProps({ authedUser }) {
+  return {
+    loading: authedUser === null
+  };
+}
+const mapDispatchToProps = {};
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);
