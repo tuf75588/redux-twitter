@@ -1,4 +1,4 @@
-import { RECEIVE_TWEETS } from '../actions/tweets';
+import { RECEIVE_TWEETS, TOGGLE_TWEET } from '../actions/tweets';
 
 export default function tweets(state = {}, action) {
   switch (action.type) {
@@ -6,6 +6,16 @@ export default function tweets(state = {}, action) {
       return {
         ...state,
         ...action.tweets
+      };
+    case TOGGLE_TWEET:
+      const { authedUser, id, hasLiked } = action;
+      const tweet = state[id];
+      return {
+        ...state,
+        [action.id]: {
+          ...tweet,
+          likes: hasLiked ? tweet.likes.filter((x) => x !== authedUser) : tweet.likes.concat([authedUser])
+        }
       };
     default:
       return state;
