@@ -81,3 +81,33 @@ a {
   margin: 0;
   cursor: pointer;
 }
+.center {
+  text-align: center;
+}
+.new-tweet {
+  width: 100%;
+  max-width: 590px;
+  padding: 10px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.textarea {
+  border-radius: 4px;
+  border: 1px solid #dad7d7;
+  padding: 10px;
+  font-size: 15px;
+  height: 100px;
+}
+.btn {
+  text-transform: uppercase;
+  margin: 35px auto;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.29);
+  cursor: pointer;
+  background: #fff;
+  font-size: 16px;
+  width: 250px;
+
+  position: relative;
+}

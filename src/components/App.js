@@ -4,6 +4,7 @@ import { handleInitialData } from '../actions/shared';
 import Dashboard from './Dashboard';
 import { BrowserRouter as Router } from 'react-router-dom';
 import LoadingBar from 'react-redux-loading';
+import New from './New';
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -16,7 +17,8 @@ class App extends Component {
           <LoadingBar />
           {this.props.loading === true ? null : (
             <div className='container'>
-              <Dashboard />
+              {/* <Dashboard /> */}
+              <New />
             </div>
           )}
         </>
