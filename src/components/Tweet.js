@@ -10,7 +10,7 @@ class Tweet extends Component {
   state = {
     hasLiked: false
   };
-  handleClick = (params) => {
+  handleClick = () => {
     const { id, tweet, authedUser } = this.props;
     console.log(tweet);
     this.setState((state, props) => {
@@ -41,8 +41,12 @@ class Tweet extends Component {
             <div className='tweet-icons'>
               <TiArrowBackOutline className='tweet-icon' style={{ verticalAlign: 'middle' }} />
               <span>2</span>
-              <button className='heart-button' onClick={() => this.handleClick('hello')}>
-                <TiHeartOutline className='tweet-icon' style={{ verticalAlign: 'middle' }} height='1em' />
+              <button className='heart-button' onClick={() => this.handleClick}>
+                {!this.state.hasLiked ? (
+                  <TiHeartOutline className='tweet-icon' style={{ verticalAlign: 'middle' }} height='1em' />
+                ) : (
+                  <TiHeartFullOutline className='tweet-icon' style={{ verticalAlign: 'middle' }} height='1em' />
+                )}
               </button>
               <span>{likes}</span>
             </div>

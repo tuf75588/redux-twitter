@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { handleAddTweet } from '../actions/tweets';
 class New extends Component {
   state = {
     tweet: ''
@@ -17,15 +18,16 @@ class New extends Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
+    const { tweet } = this.state;
+    const { authedUser } = this.props;
+    this.props.dispatch(handleAddTweet({ text: tweet, author: authedUser, replyingTo: 'Andrew' }));
+    //react router redirect
   };
   render() {
-    const { name } = this.props;
-    console.log(name);
-
     return (
       <div>
         <h1 className='center'>Compose New Tweet</h1>
-        <form className='new-tweet'>
+        <form className='new-tweet' onSubmit={this.handleSubmit}>
           <textarea name='' id='' maxLength='200' className='textarea' onChange={this.handleInputChange} />
           <button
             className='btn'
@@ -38,7 +40,7 @@ class New extends Component {
     );
   }
 }
-const mapStateToProps = (state, props) => ({
-  name: 'andrew'
+const mapStateToProps = ({ authedUser }, props) => ({
+  authedUser
 });
 export default connect(mapStateToProps)(New);
