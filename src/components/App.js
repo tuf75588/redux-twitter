@@ -17,8 +17,7 @@ class App extends Component {
           <LoadingBar />
           {this.props.loading === true ? null : (
             <div className='container'>
-              {/* <Dashboard /> */}
-              <New />
+              <Dashboard />
             </div>
           )}
         </>

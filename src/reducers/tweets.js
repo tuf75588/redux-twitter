@@ -12,9 +12,10 @@ export default function tweets(state = {}, action) {
       const tweet = state[id];
       return {
         ...state,
-        [action.id]: {
+        [id]: {
           ...tweet,
-          likes: hasLiked ? tweet.likes.filter((x) => x !== authedUser) : tweet.likes.concat([authedUser])
+          likes:
+            hasLiked === true ? tweet.likes.filter((uuid) => uuid !== authedUser) : tweet.likes.concat([authedUser])
         }
       };
     case ADD_TWEET:

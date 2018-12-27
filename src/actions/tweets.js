@@ -13,17 +13,17 @@ export function receiveTweets(tweets) {
 function toggleTweet({ authedUser, hasLiked, id }) {
   return {
     type: TOGGLE_TWEET,
+    id,
     authedUser,
-    hasLiked,
-    id
+    hasLiked
   };
 }
 export function handleToggleTweet(info) {
   return (dispatch) => {
+    dispatch(toggleTweet(info));
     return saveLikeToggle(info).catch((e) => {
-      console.warn(`error in handleToggleTweet ${e}`);
+      console.warn('error in liking tweet');
       dispatch(toggleTweet(info));
-      alert(`there was an error in liking the tweet, please try again!`);
     });
   };
 }
