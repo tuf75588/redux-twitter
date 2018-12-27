@@ -10,7 +10,6 @@ class Tweet extends Component {
   handleClick = (e) => {
     const { dispatch, tweet, authedUser } = this.props;
     e.preventDefault();
-    console.log(tweet);
     dispatch(
       handleToggleTweet({
         id: tweet.id,
@@ -24,7 +23,7 @@ class Tweet extends Component {
     console.log(tweet);
     return (
       <li>
-        <Link className='tweet' to='/'>
+        <Link className='tweet' to={`tweet/${tweet.id}`}>
           <img src={tweet.avatar} alt='' className='avatar' />
           <div className='tweet-info'>
             <div>
