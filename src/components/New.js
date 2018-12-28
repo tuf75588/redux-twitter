@@ -20,10 +20,13 @@ class New extends Component {
     event.preventDefault();
     const { tweet } = this.state;
     const { authedUser } = this.props;
-    this.props.dispatch(handleAddTweet({ text: tweet, author: authedUser, replyingTo: 'Andrew' }));
+
+    this.props.dispatch(handleAddTweet({ text: tweet, id: this.props.id }));
+    // this.props.history.push('/');
     //react router redirect
   };
   render() {
+    console.log(this.props.tweets);
     return (
       <div>
         <h1 className='center'>Compose New Tweet</h1>
@@ -40,7 +43,8 @@ class New extends Component {
     );
   }
 }
-const mapStateToProps = ({ authedUser }, props) => ({
+const mapStateToProps = ({ authedUser, tweets }, props) => ({
+  tweets,
   authedUser
 });
 export default connect(mapStateToProps)(New);

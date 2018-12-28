@@ -8,24 +8,33 @@ export default function tweets(state = {}, action) {
         ...action.tweets
       };
     case TOGGLE_TWEET:
-      const { authedUser, id, hasLiked } = action;
-      const tweet = state[id];
       return {
         ...state,
-        [id]: {
-          ...tweet,
+        [action.id]: {
+          ...state[action.id],
           likes:
-            hasLiked === true ? tweet.likes.filter((uuid) => uuid !== authedUser) : tweet.likes.concat([authedUser])
+            action.hasLiked === true
+              ? state[action.id].likes.filter((uid) => uid !== action.authedUser)
+              : state[action.id].likes.concat([action.authedUser])
         }
       };
     case ADD_TWEET:
-      console.log(state);
+      const { tweet } = action;
+      let replyingTo = {};
+      if (tweet.replyingTo !== null) {
+        replyingTo = {
+          [tweet.replyingTo]: {
+            ...state[tweet.replyingTo],
+            replies: state[tweet.replyingTo].replies.concat([tweet.id])
+          }
+        };
+      }
       return {
         ...state,
-        [action.tweet.id]: {
-          ...action.tweet
-        }
+        [action.tweet.id]: action.tweet,
+        ...replyingTo
       };
+
     default:
       return state;
   }

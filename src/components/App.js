@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LoadingBar from 'react-redux-loading';
 import New from './New';
 import TweetPage from './TweetPage';
+import Nav from './Nav';
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -16,13 +17,16 @@ class App extends Component {
       <Router>
         <>
           <LoadingBar />
-          {this.props.loading === true ? null : (
-            <div className='container'>
-              <Route exact path='/' component={Dashboard} />
-              <Route path='/tweet/:id' component={TweetPage} />
-              <Route exact path='/new' component={New} />
-            </div>
-          )}
+          <div className='container'>
+            <Nav />
+            {this.props.loading === true ? null : (
+              <div>
+                <Route path='/' exact component={Dashboard} />
+                <Route path='/tweet/:id' component={TweetPage} />
+                <Route path='/new' component={New} />
+              </div>
+            )}
+          </div>
         </>
       </Router>
     );

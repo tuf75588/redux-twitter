@@ -4,7 +4,7 @@ import { TiArrowBackOutline } from 'react-icons/ti';
 import { TiHeartOutline } from 'react-icons/ti';
 import { TiHeartFullOutline } from 'react-icons/ti';
 import { handleToggleTweet } from '../actions/tweets';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { formatDate, formatTweet } from '../utils/helpers';
 class Tweet extends Component {
   handleClick = (e) => {
@@ -18,36 +18,42 @@ class Tweet extends Component {
       })
     );
   };
+  toParent = (e, id) => {
+    e.preventDefault();
+    this.props.history.push(`/tweet/${id}`);
+  };
   render() {
-    const { tweet, autheduser } = this.props;
-    console.log(tweet);
+    const { tweet, id } = this.props;
+
     return (
-      <li>
-        <Link className='tweet' to={`tweet/${tweet.id}`}>
-          <img src={tweet.avatar} alt='' className='avatar' />
-          <div className='tweet-info'>
-            <div>
-              <span>{tweet.name}</span>
-              <span />
-              <div>{formatDate(tweet.timestamp)}</div>{' '}
-              {/* {replyTweet.length ? <button className='replying-to'>Replying to : {replyTweet}</button> : null} */}
-              <p>{tweet.text}</p>
-            </div>
-            <div className='tweet-icons'>
-              <TiArrowBackOutline className='tweet-icon' style={{ verticalAlign: 'middle' }} />
-              <span />
-              <button className='heart-button' onClick={this.handleClick}>
-                {!tweet.hasLiked ? (
-                  <TiHeartOutline className='tweet-icon' style={{ verticalAlign: 'middle' }} height='1em' />
-                ) : (
-                  <TiHeartFullOutline className='tweet-icon' style={{ verticalAlign: 'middle' }} height='1em' />
-                )}
-              </button>
-              <span>{tweet.likes}</span>
-            </div>
+      <Link className='tweet' to={`/tweet/${id}`}>
+        <img src={tweet.avatar} alt='' className='avatar' />
+        <div className='tweet-info'>
+          <div>
+            <span>{tweet.name}</span>
+            <span />
+            <div>{formatDate(tweet.timestamp)}</div>
+            {/* Replying to button here */}
+            <p>{tweet.text}</p>
           </div>
-        </Link>
-      </li>
+          <div className='tweet-icons'>
+            <TiArrowBackOutline
+              className='tweet-icon'
+              style={{ verticalAlign: 'middle' }}
+              onClick={(e) => this.toParent(e, id)}
+            />
+            <span />
+            <button className='heart-button' onClick={this.handleClick}>
+              {!tweet.hasLiked ? (
+                <TiHeartOutline className='tweet-icon' style={{ verticalAlign: 'middle' }} height='1em' />
+              ) : (
+                <TiHeartFullOutline className='tweet-icon' style={{ verticalAlign: 'middle' }} height='1em' />
+              )}
+            </button>
+            <span>{tweet.likes}</span>
+          </div>
+        </div>
+      </Link>
     );
   }
 }
@@ -59,10 +65,11 @@ const mapStateToProps = ({ users, tweets, authedUser }, { id }) => {
 
   return {
     authedUser,
-    tweet: tweet ? formatTweet(tweet, users[tweet.author], authedUser, parentTweet) : null
+    tweet: tweet ? formatTweet(tweet, users[tweet.author], authedUser, parentTweet) : null,
+    id
   };
 };
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps)(Tweet);
+export default withRouter(connect(mapStateToProps)(Tweet));

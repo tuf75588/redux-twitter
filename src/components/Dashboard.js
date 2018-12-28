@@ -13,7 +13,9 @@ class Dashboard extends Component {
           <div>
             <ul className='dashboard-list'>
               {id.map((id) => (
-                <Tweet id={id} />
+                <li key={id}>
+                  <Tweet id={id} />
+                </li>
               ))}
             </ul>
           </div>
