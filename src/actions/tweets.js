@@ -1,5 +1,6 @@
 import { saveLikeToggle } from '../utils/api';
 import { saveTweet } from '../utils/api';
+import { showLoading, hideLoading } from 'react-redux-loading';
 export const RECEIVE_TWEETS = 'RECEIVE_TWEETS';
 export const TOGGLE_TWEET = 'TOGGLE_TWEET';
 //! new action creator for saving a tweet.
@@ -33,14 +34,18 @@ function addTweet(tweet) {
     tweet
   };
 }
-export function handleAddTweet(tweet) {
-  return (dispatch) => {
-    return saveTweet(tweet)
-      .then((formattedTweet) => {
-        dispatch(addTweet(formattedTweet));
-      })
-      .catch((e) => {
-        console.warn('error in saving tweet!', e);
-      });
+export function handleAddTweet(text, replyingTo) {
+  return (dispatch, getState) => {
+    const { authedUser } = getState();
+
+    dispatch(showLoading());
+
+    return saveTweet({
+      text,
+      author: authedUser,
+      replyingTo
+    })
+      .then((tweet) => dispatch(addTweet(tweet)))
+      .then(() => dispatch(hideLoading()));
   };
 }
