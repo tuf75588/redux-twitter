@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Tweet from './Tweet';
-import NewTweet from './New';
+import NewTweet from './NewTweet';
 
 class TweetPage extends Component {
   render() {
