@@ -8,7 +8,7 @@ class TweetPage extends Component {
     return (
       <div>
         <Tweet id={this.props.id} />
-        <New id={this.props.id} />
+        <NewTweet id={this.props.id} />
 
         <h1 className='replies'>Replies</h1>
         {this.props.replies.map((id) => (
