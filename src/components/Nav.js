@@ -1,9 +1,9 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-const Nav = ({ match }) => {
+export default function Nav () {
   return (
-    <nav className='navbar'>
+    <nav className='nav'>
       <ul>
         <li>
           <NavLink to='/' exact activeClassName='active'>
@@ -17,6 +17,5 @@ const Nav = ({ match }) => {
         </li>
       </ul>
     </nav>
-  );
-};
-export default Nav;
+  )
+}
